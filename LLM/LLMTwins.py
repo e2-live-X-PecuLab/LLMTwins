@@ -12,7 +12,6 @@ from LLM.utils.module_handler import import_modules_from_directory
 from LLM.utils.RAG.document_loader import DocumentLoader
 from LLM.utils.RAG.agent import Agent
 from callbacks import *
-from langchain_community.agent_toolkits.load_tools import load_tools
 
 class CallbackHandler(BaseCallbackHandler):
     def __init__(self, api_table) -> None:
@@ -57,7 +56,7 @@ class DigitalTwins:
 
     def set_model(self, model = None):
         if (model == None):
-            self.llm = ChatOpenAI(openai_api_key="KEY",model = "gpt-4", temperature = 0)
+            self.llm = ChatOpenAI(model = "gpt-4o", temperature = 0)
         else:
             print(f"Model is set to {model}.")
             self.llm = HuggingFaceEndpoint(repo_id = model, huggingfacehub_api_token = os.getenv("HUGGINGFACEHUB_API_TOKEN"))
